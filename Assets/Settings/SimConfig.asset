@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c15f7f1c29867c3498ac38987a093e8d, type: 3}
+  m_Name: SimConfig
+  m_EditorClassIdentifier: Assembly-CSharp::Core.SimConfig
+  Mass: 0.6
+  MaxThrustPerMotorN: 6.5
+  MotorTau: 0.08
+  QuadraticDragCoef: 0.012
+  AngularDamping: 0.05
+  MaxPitchRollRateDeg: 200
+  MaxYawRateDeg: 120
+  StickSmoothTau: 0.15
+  RateResponse: 20
+  CameraTiltDeg: 30
+  FovDeg: 110
+  ThrottleRatePerSec: 0.5
+  ArmingDurationSec: 0.3
+  RespawnFreezeSec: 0.5
+  CrashSpeedThreshold: 8
+  BlastRadiusMeters: 10

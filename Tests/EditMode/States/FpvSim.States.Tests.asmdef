@@ -1,0 +1,20 @@
+{
+  "name": "FpvSim.States.Tests",
+  "rootNamespace": "FpvSim.States.Tests",
+  "references": [
+    "FpvSim.States",
+    "FpvSim.Flight",
+    "FpvSim.Signals",
+    "Zenject",
+    "UnityEngine.TestRunner",
+    "UnityEditor.TestRunner"
+  ],
+  "includePlatforms": ["Editor"],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": true,
+  "precompiledReferences": ["nunit.framework.dll"],
+  "autoReferenced": false,
+  "defineConstraints": ["UNITY_INCLUDE_TESTS"],
+  "noEngineReferences": false
+}
