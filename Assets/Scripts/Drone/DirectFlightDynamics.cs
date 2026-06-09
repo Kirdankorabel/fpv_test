@@ -9,6 +9,9 @@ namespace Drone
         private Rigidbody _rb;
         private Transform _root;
         private SimConfig _cfg;
+        private PidController _pitchPid;
+        private PidController _rollPid;
+        private PidController _yawPid;
         private float _smoothedThrottle;
         private float _smoothedPitch;
         private float _smoothedRoll;
@@ -25,6 +28,11 @@ namespace Drone
             rb.angularDamping = cfg.AngularDamping;
             rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
             rb.interpolation = RigidbodyInterpolation.Interpolate;
+
+            _pitchPid = new PidController(cfg.PitchRollKp, cfg.PitchRollKi, cfg.PitchRollKd, cfg.PidIntegralLimit);
+            _rollPid = new PidController(cfg.PitchRollKp, cfg.PitchRollKi, cfg.PitchRollKd, cfg.PidIntegralLimit);
+            _yawPid = new PidController(cfg.YawKp, cfg.YawKi, cfg.YawKd, cfg.PidIntegralLimit);
+
             _smoothedThrottle = 0f;
             _smoothedPitch = 0f;
             _smoothedRoll = 0f;
@@ -45,11 +53,16 @@ namespace Drone
             float rollOmegaTarget = -_smoothedRoll * _cfg.MaxPitchRollRateDeg * Mathf.Deg2Rad;
             float yawOmegaTarget = _smoothedYaw * _cfg.MaxYawRateDeg * Mathf.Deg2Rad;
 
-            Vector3 targetBodyAngVel = new Vector3(pitchOmegaTarget, yawOmegaTarget, rollOmegaTarget);
-            Vector3 targetWorldAngVel = _root.TransformDirection(targetBodyAngVel);
+            Vector3 bodyOmega = _root.InverseTransformDirection(_rb.angularVelocity);
+            float pitchError = pitchOmegaTarget - bodyOmega.x;
+            float yawError = yawOmegaTarget - bodyOmega.y;
+            float rollError = rollOmegaTarget - bodyOmega.z;
 
-            float rateAlpha = Mathf.Clamp01(_cfg.RateResponse * dt);
-            _rb.angularVelocity = Vector3.Lerp(_rb.angularVelocity, targetWorldAngVel, rateAlpha);
+            float pitchTorque = _pitchPid.Update(pitchError, dt);
+            float yawTorque = _yawPid.Update(yawError, dt);
+            float rollTorque = _rollPid.Update(rollError, dt);
+
+            _rb.AddRelativeTorque(new Vector3(pitchTorque, yawTorque, rollTorque), ForceMode.Force);
 
             float thrustForce = _smoothedThrottle * _cfg.MaxThrustPerMotorN * 4f;
             if (_cfg.MaxAltitudeMeters > 0f && _rb.position.y > _cfg.MaxAltitudeMeters) thrustForce = 0f;
@@ -65,6 +78,9 @@ namespace Drone
             _smoothedPitch = 0f;
             _smoothedRoll = 0f;
             _smoothedYaw = 0f;
+            _pitchPid.Reset();
+            _rollPid.Reset();
+            _yawPid.Reset();
         }
 
         public float CurrentAltitudeAboveGround

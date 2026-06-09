@@ -24,7 +24,19 @@ namespace Core
         public float MaxPitchRollRateDeg = 200f;
         public float MaxYawRateDeg = 120f;
         public float StickSmoothTau = 0.15f;
-        public float RateResponse = 20f;
+
+        [Header("Rate PID — pitch/roll")]
+        public float PitchRollKp = 0.05f;
+        public float PitchRollKi = 0.005f;
+        public float PitchRollKd = 0.002f;
+
+        [Header("Rate PID — yaw")]
+        public float YawKp = 0.1f;
+        public float YawKi = 0.01f;
+        public float YawKd = 0f;
+
+        [Header("Rate PID — anti-windup")]
+        public float PidIntegralLimit = 1f;
 
         [Header("FPV camera")]
         public float FovDeg = 110f;

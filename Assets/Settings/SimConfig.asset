@@ -22,10 +22,16 @@ MonoBehaviour:
   MaxPitchRollRateDeg: 200
   MaxYawRateDeg: 120
   StickSmoothTau: 0.15
-  RateResponse: 20
+  PitchRollKp: 0.05
+  PitchRollKi: 0.005
+  PitchRollKd: 0.002
+  YawKp: 0.1
+  YawKi: 0.01
+  YawKd: 0
+  PidIntegralLimit: 1
   FovDeg: 110
   ThrottleRatePerSec: 0.5
   ArmingDurationSec: 0.3
   RespawnFreezeSec: 0.5
   CrashSpeedThreshold: 8
-  BlastRadiusMeters: 2
+  BlastRadiusMeters: 3
