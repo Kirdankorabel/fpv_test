@@ -13,18 +13,19 @@ MonoBehaviour:
   m_Name: SimConfig
   m_EditorClassIdentifier: Assembly-CSharp::Core.SimConfig
   Mass: 0.6
-  MaxThrustPerMotorN: 6.5
+  MaxThrustPerMotorN: 8
   MotorTau: 0.08
   QuadraticDragCoef: 0.012
   AngularDamping: 0.05
+  MaxAltitudeMeters: 200
+  MapHalfSizeMeters: 500
   MaxPitchRollRateDeg: 200
   MaxYawRateDeg: 120
   StickSmoothTau: 0.15
   RateResponse: 20
-  CameraTiltDeg: 30
   FovDeg: 110
   ThrottleRatePerSec: 0.5
   ArmingDurationSec: 0.3
   RespawnFreezeSec: 0.5
   CrashSpeedThreshold: 8
-  BlastRadiusMeters: 10
+  BlastRadiusMeters: 2

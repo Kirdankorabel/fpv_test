@@ -27,7 +27,6 @@ namespace Core
         public float RateResponse = 20f;
 
         [Header("FPV camera")]
-        public float CameraTiltDeg = 30f;
         public float FovDeg = 110f;
 
         [Header("Input — throttle integration")]

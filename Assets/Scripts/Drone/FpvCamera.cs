@@ -12,7 +12,6 @@ namespace Drone
 
         private void Start()
         {
-            transform.localRotation = Quaternion.Euler(-_cfg.CameraTiltDeg, 0f, 0f);
             _cam.fieldOfView = _cfg.FovDeg;
         }
     }
